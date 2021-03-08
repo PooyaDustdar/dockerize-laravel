@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "laravel/laravel": "^8.0"
+        "laravel/framework": "^8.0"
     },
     "authors": [
         {
