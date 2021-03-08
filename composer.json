@@ -30,7 +30,5 @@
                 "Pdustdar\\DockerizedLaravel\\DockerizeServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
