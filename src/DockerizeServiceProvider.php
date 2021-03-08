@@ -11,13 +11,11 @@ class DockerizeServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../Dockerized' => base_path('Dockerized'),
-        ]);
-        $this->publishes([
             __DIR__ . '/../docker-compose.yml' => base_path('docker-compose.yml')
+
         ]);
-        if ($this->app->runningInConsole())
-            $this->commands([
-                DockerCommand::class
-            ]);
+        $this->commands([
+            DockerCommand::class
+        ]);
     }
 }
