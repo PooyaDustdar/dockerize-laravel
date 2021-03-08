@@ -1,6 +1,7 @@
 <?php
 namespace Pdustdar\DockerizedLaravel;
 
+use Pdustdar\DockerizedLaravel\DockerCommand;
 use Illuminate\Support\ServiceProvider;
 
 class DockerizeServiceProvider extends ServiceProvider
