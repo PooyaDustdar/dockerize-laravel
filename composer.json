@@ -1,0 +1,36 @@
+{
+    "name": "pdustdar/dockerize-laravel",
+    "type": "library",
+    "description": "Deploy Dockerized Laravel Framework With Nginx.",
+    "keywords": [
+        "framework",
+        "laravel",
+        "docker",
+        "deploy"
+    ],
+    "license": "MIT",
+    "require": {
+        "laravel/laravel": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "pooya dustdar",
+            "email": "pdustdar@gmail.com",
+            "homepage": "https://dustdar.ir"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pdustdar\\DockerizedLaravel\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pdustdar\\DockerizedLaravel\\DockerizeServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
