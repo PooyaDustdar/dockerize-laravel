@@ -1,4 +1,5 @@
 <?php
+
 namespace Pdustdar\DockerizedLaravel;
 
 use Pdustdar\DockerizedLaravel\DockerCommand;
@@ -10,12 +11,13 @@ class DockerizeServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../Dockerized' => base_path('Dockerized'),
-            __DIR__ . '/../docker-compose.yml' => base_path('docker-compose.yml'),
+        ]);
+        $this->publishes([
+            __DIR__ . '/../docker-compose.yml' => base_path('docker-compose.yml')
         ]);
         if ($this->app->runningInConsole())
             $this->commands([
                 DockerCommand::class
             ]);
-        
     }
 }
