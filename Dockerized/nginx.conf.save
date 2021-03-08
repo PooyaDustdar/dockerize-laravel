@@ -1,0 +1,50 @@
+upstream fpm {
+    server 0.0.0.0:9000;
+}
+
+server {
+    listen 80;
+    server_name 0.0.0.0;
+    client_max_body_size 200M;    
+    root /var/www/html/storage/app/public;
+    index index.php;
+    add_header Access-Control-Allow-Origin *
+    types {
+        application/vnd.android.package-archive apk;
+    }
+    location ~* /api/(.*)\.(.*)$ {
+        add_header  X-check-access direct;
+        expires 1y;
+        try_files /marged/$1.$2 /api/$1;
+    }
+    location ~* /api/(.*)/scale/(.*)$ {
+        add_header  X-check-access "cache";
+        expires 1y;
+        try_files  /cache/$1_$2.webp /index.php?$query_string;
+    }
+    location ~* /api/stream/(.*)$ {
+        add_header  X-check-access direct-none-exetenstion;
+        expires 1y;
+        try_files /marged/$1.mp4 /marged/$1.jpg  /marged/$1.jpeg /marged/$1.png /marged/$1.apk /index.php?$query_string;
+    }
+    location ~* /api/(.*)$ {
+        add_header  X-check-access direct-none-exetenstion;
+        expires 1y;
+        try_files /marged/$1.mp4 /marged/$1.jpg  /marged/$1.jpeg /marged/$1.png /marged/$1.apk /index.php?$query_string;
+    }
+    location /cache {
+        alias /var/www/html/storage/app/public/cache;
+    }
+    location /marged {
+        alias /var/www/html/storage/app/public/marged;
+    }
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+        fastcgi_pass fpm;
+        fastcgi_param  SCRIPT_FILENAME    /var/www/html/public$fastcgi_script_name;
+        include fastcgi_params;
+        add_header  X-check-access fpm;
+    }
+}
