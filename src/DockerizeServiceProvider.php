@@ -1,31 +1,33 @@
 <?php
+
 namespace Pdustdar\DockerizedLaravel;
 
 use Illuminate\Support\ServiceProvider;
 use Pdustdar\DockerizedLaravel\Console\InstallCommand;
 use Pdustdar\DockerizedLaravel\Console\PublishCommand;
 use Pdustdar\DockerizedLaravel\Console\StartServiceCommand;
+use Pdustdar\DockerizedLaravel\Console\StopServiceCommand;
 
 class DockerizeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([            
+            $this->commands([
+                StopServiceCommand::class,
                 StartServiceCommand::class,
                 InstallCommand::class,
                 PublishCommand::class,
             ]);
             $this->publishes([
-                __DIR__ . '/../docker-compose.yml' => $this->app->basePath('docker-compose.yml'),
-                __DIR__ . '/../Dockerized' => $this->app->basePath('Dockerized'),
-            ],"dockerized");
-            
+                __DIR__ . '/../config/deploy.php' => $this->app->configPath('deploy.php'),
+            ], "dockerized");
         }
     }
     public function provides()
     {
         return [
+            StopServiceCommand::class,
             StartServiceCommand::class,
             InstallCommand::class,
             PublishCommand::class,

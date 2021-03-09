@@ -1,0 +1,43 @@
+FROM ubuntu:20.04
+LABEL maintainer="Pooya Dustdar <pdustdar@gmail.com>"
+WORKDIR /var/www/html
+ENV DEBIAN_FRONTEND noninteractive
+ENV TZ=Asia/Tehran
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt update
+
+RUN apt-get install -y gnupg gosu ca-certificates libcap2-bin python2 libicu-dev \
+    gettext nginx 
+
+RUN mkdir -p ~/.gnupg \
+    && chmod 600 ~/.gnupg \
+    && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
+    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E5267A6C \
+    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C300EE8C \
+    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
+    && apt-get update \
+    && apt-get upgrade -y
+
+RUN apt-get install -y php8.0-cli php8.0-dev php8.0-igbinary\
+    php8.0-bcmath php8.0-intl php8.0-readline php8.0-msgpack \
+    php8.0-fpm php8.0-mbstring php8.0-xml
+{{services}}
+
+
+RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
+
+RUN mkdir /etc/nginx/templates
+VOLUME    /etc/nginx/templates/
+VOLUME /usr/local/etc/php/conf.d/
+COPY www.conf /etc/php/8.0/fpm/pool.d/www.conf
+COPY fastcgi_params /etc/nginx/fastcgi_params
+
+EXPOSE 80
+EXPOSE 443
+EXPOSE 9000
+
+COPY bash.sh /bash.sh
+RUN chmod +x /bash.sh
+STOPSIGNAL SIGQUIT
+CMD /bash.sh
