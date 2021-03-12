@@ -1,5 +1,5 @@
-# dockerize-laravel
-Easy Deploy Dockerized Laravel Framework With Nginx (Production).
+# Dockerize Laravel
+Easy Deploy Dockerized Laravel App With Nginx (Production).
 
 ## Installation using [Composer](https://getcomposer.org/)
 In your terminal application move to the root directory of your laravel project using the `cd` command and require the project as a dependency using composer.
@@ -12,18 +12,18 @@ php artisan vendor:publish --provider=Pdustdar\DockerizedLaravel\DockerizeServic
 ```
 
 ## Create And Publish docker files and configurations 
-you can create and publish docker file and settign ofter install and register provider. run this:
+You can create and publish docker file and setting after install and register provider. run this:
 
 ```sh
 php artisan docker:publish
 ```
 
 ## Start and Stop services
-ofter create and publish docker files you can run services with this:
+After creating and publishing the docker files, you can run the services by:
 ```sh
 php artisan docker:up
 ```
-And for Stop Service:
+And to stop the service:
 ```sh
 php artisan docker:stop
 ``` 
