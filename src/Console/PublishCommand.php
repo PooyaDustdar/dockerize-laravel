@@ -35,7 +35,8 @@ class PublishCommand extends Command
             "htop" => "htop ",
             "git" => "git ",
             "nmap" => "nmap ",
-            "net-tools" => "net-tools",
+            "net-tools" => "net-tools ",
+            "iputils-ping" => "iputils-ping",
         ],
 
     ];
@@ -51,7 +52,6 @@ class PublishCommand extends Command
         $dev_tools = $this->selectDevTools();
         $need_install = $this->getInstalltion($selected_services, $gd_config, $dev_tools);
         $docker_file = implode("\n", $need_install);
-
         $this->publishDockerCompose($selected_services);
         $this->publishDockerfile($docker_file);
         return 0;
