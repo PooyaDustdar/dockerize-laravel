@@ -1,0 +1,7 @@
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
+    volumes:
+      - ./../app/services/redis:/data

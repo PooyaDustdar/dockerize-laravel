@@ -1,0 +1,11 @@
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+    ports:
+      - '${FORWARD_DB_PORT:-27017}:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: '${DB_USERNAME}'
+      MONGO_INITDB_ROOT_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - ./../app/services/mongodb:/data/db
