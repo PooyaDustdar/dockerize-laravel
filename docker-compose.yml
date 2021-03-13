@@ -1,10 +1,6 @@
 version: '3'
 services:
-<<<<<<< HEAD
   laravel:
-=======
-  storageserver:
->>>>>>> 0061025519e4d43713ac649a93c52480e16cadf7
     container_name: ${APP_NAME}
     restart: always
     build:
