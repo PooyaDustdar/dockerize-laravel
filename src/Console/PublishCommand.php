@@ -147,6 +147,8 @@ class PublishCommand extends Command
     {
         $docker_base = file_get_contents(__DIR__ . "/../../stubs/dockerfile.stub");
         $docker_file = str_replace("{{services}}", $services, $docker_base);
+        if(!file_exists($this->laravel->basePath('Dockerized')))
+            mkdir($this->laravel->basePath('Dockerized'));
         file_put_contents($this->laravel->basePath('Dockerized/Dockerfile'), $docker_file);
     }
 }
