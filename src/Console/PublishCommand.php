@@ -150,10 +150,10 @@ class PublishCommand extends Command
         if(!file_exists($this->laravel->basePath('Dockerized')))
             mkdir($this->laravel->basePath('Dockerized'));
         file_put_contents($this->laravel->basePath('Dockerized/Dockerfile'), $docker_file);
-        file_put_contents($this->laravel->basePath('Dockerized/php.ini'), file_get_contents(__DIR__."/../Dockerized/php.ini"));
-        file_put_contents($this->laravel->basePath('Dockerized/www.conf'), file_get_contents(__DIR__."/../Dockerized/www.conf"));
-        file_put_contents($this->laravel->basePath('Dockerized/nginx.conf'), file_get_contents(__DIR__."/../Dockerized/nginx.conf"));
-        file_put_contents($this->laravel->basePath('Dockerized/fastcgi_params'),file_get_contents(__DIR__."/../Dockerized/fastcgi_params"));
-        file_put_contents($this->laravel->basePath('Dockerized/bash.sh'),file_get_contents(__DIR__."/../Dockerized/bash.sh"));
+        file_put_contents($this->laravel->basePath('Dockerized/php.ini'), file_get_contents(__DIR__."/../../Dockerized/php.ini"));
+        file_put_contents($this->laravel->basePath('Dockerized/www.conf'), file_get_contents(__DIR__."/../../Dockerized/www.conf"));
+        file_put_contents($this->laravel->basePath('Dockerized/nginx.conf'), file_get_contents(__DIR__."/../../Dockerized/nginx.conf"));
+        file_put_contents($this->laravel->basePath('Dockerized/fastcgi_params'),file_get_contents(__DIR__."/../../Dockerized/fastcgi_params"));
+        file_put_contents($this->laravel->basePath('Dockerized/bash.sh'),file_get_contents(__DIR__."/../../Dockerized/bash.sh"));
     }
 }
