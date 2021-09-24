@@ -3,7 +3,6 @@
 namespace Pdustdar\DockerizedLaravel;
 
 use Illuminate\Support\ServiceProvider;
-use Pdustdar\DockerizedLaravel\Console\InstallCommand;
 use Pdustdar\DockerizedLaravel\Console\PublishCommand;
 use Pdustdar\DockerizedLaravel\Console\StartServiceCommand;
 use Pdustdar\DockerizedLaravel\Console\StopServiceCommand;
@@ -16,7 +15,6 @@ class DockerizeServiceProvider extends ServiceProvider
             $this->commands([
                 StopServiceCommand::class,
                 StartServiceCommand::class,
-                InstallCommand::class,
                 PublishCommand::class,
             ]);
             $this->publishes([
@@ -29,7 +27,6 @@ class DockerizeServiceProvider extends ServiceProvider
         return [
             StopServiceCommand::class,
             StartServiceCommand::class,
-            InstallCommand::class,
             PublishCommand::class,
         ];
     }
